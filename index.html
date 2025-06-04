@@ -1,13 +1,319 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>last lesson</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webpage Layout</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Pretendard', sans-serif;
+            margin: 0;
+            display: flex;
+            overflow-x: hidden;
+            font-size: 14px; /* body의 기본 폰트 크기는 14px로 유지 */
+        }
+
+        .left-panel {
+            width: 380px;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #fff;
+            border-right: 1px solid #000;
+            
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden; 
+            z-index: 1000;
+        }
+
+        .right-content {
+            flex-grow: 1;
+            padding: 20px;
+            box-sizing: border-box;
+            min-width: 0;
+            margin-left: 380px; 
+        }
+
+        /* Left Panel Styling */
+        .left-panel .header-icon {
+            display: flex; /* Flexbox를 사용하여 내부 요소 중앙 정렬 */
+            justify-content: center; /* 가로 방향 중앙 정렬 */
+            margin-bottom: 30px; /* 로고 아래 여백을 30px로 증가 */
+        }
+        .left-panel .header-icon-img {
+            width: 250px; /* 기존 50px의 5배 */
+            height: 250px; /* 기존 50px의 5배 */
+            display: block; /* img도 블록 요소로 만들어 margin-bottom이 잘 적용되도록 */
+        }
+
+        .left-panel h2 {
+            text-align: center; /* 제목 중앙 정렬 추가 */
+            margin-top: 0;
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 24px; 
+            font-weight: bold; /* 제목은 Bold 유지 */
+        }
+
+        .left-panel .intro-text {
+            font-size: 14px; 
+            line-height: 1.6;
+            color: #000; 
+            margin-bottom: 25px; 
+            margin-top: 15px; 
+        }
+
+        .left-panel ul.item-list {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 25px; 
+            margin-top: 25px; 
+        }
+
+        .left-panel ul.item-list li {
+            margin-bottom: 8px; 
+        }
+
+        .left-panel ul.item-list li a {
+            text-decoration: none;
+            color: #000;
+            font-weight: normal; /* 레귤러 유지 */
+            display: inline-block;
+            font-size: 14px; /* 14px로 통일 */
+        }
+        
+        .left-panel ul.item-list li a:hover {
+            color: #000;
+            text-decoration: underline;
+        }
+
+        /* About 섹션 대신 날짜/시간 정보 스타일 */
+        .datetime-info {
+            color: #333;
+            font-size: 14px; /* 14px로 통일 */
+            margin-top: 25px; /* 위쪽 여백 */
+            margin-bottom: 25px; /* 아래쪽 여백 */
+            line-height: 1.5;
+        }
+        .datetime-info p {
+            margin: 0;
+        }
+
+        .left-panel .copyright {
+            margin-top: 30px; 
+            font-size: 14px; /* 14px로 통일 */
+            color: #666;
+        }
+
+        /* Right Content Styling */
+        .right-content .item-section {
+            padding-top: 30px; 
+            margin-top: -30px; 
+        }
+
+        .right-content .item-section:first-of-type {
+            /* padding-top: 0; */ /* 제거 (맨 위 문구 때문에) */
+            margin-top: 0;
+        }
+
+        .right-content h1 {
+            margin-top: 0;
+            color: #333;
+            margin-bottom: 15px; 
+            font-size: 1.8em;
+        }
+
+        /* GIF 컨테이너 스타일 */
+        .gif-container {
+            width: 100%;
+            padding-top: 60%; /* 원본 image-placeholder와 동일한 비율 유지 */
+            position: relative;
+            margin-bottom: 15px; /* 기존 placeholder와 동일한 하단 여백 */
+            overflow: hidden; /* 이미지가 컨테이너를 벗어나는 것을 방지 */
+            background-color: #ffffff; /* GIF 로드 전 배경색 */
+        }
+
+        .gif-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* 이미지가 비율을 유지하며 컨테이너에 맞춰집니다. (cover도 가능) */
+            display: block;
+        }
+
+        .right-content p {
+            line-height: 1.6;
+            color: #000;
+            margin-bottom: 20px; 
+            font-size: 1em; /* body의 font-size: 14px를 따름 */
+        }
+
+        .right-content .bottom-title {
+            color: #333;
+            margin-top: 15px; 
+            font-size: 1.8em;
+        }
+        .right-content h2 {
+            margin-top: 8px; 
+            font-size: 1.5em;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                overflow-x: auto;
+            }
+            .left-panel {
+                position: static;
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #000;
+                height: auto;
+                overflow-y: visible;
+            }
+            .right-content {
+                width: 100%;
+                margin-left: 0;
+            }
+        }
+
+        /* Full Stroke Styling */
+        .full-stroke {
+            height: 1px;
+            background-color: #000;
+            margin-top: 25px; 
+            margin-bottom: 25px; 
+            margin-left: -20px;
+            width: calc(100% + 40px);
+        }
+
+        /* ★★★ 새로운 문구 스타일 ★★★ */
+        .right-content .click-info {
+            text-align: center; /* 중앙 정렬 */
+            font-size: 14px; /* 폰트 크기 조정 */
+            color: #000; /* 색상 조정 */
+            margin-bottom: 15px; /* 아래쪽 여백 */
+            padding-top: 0px; /* right-content 자체의 padding-top이 있으므로 0으로 설정 */
+        }
+    </style>
 </head>
 <body>
-<h1>test</h1>
-<img src="bg.jpg">
-<a href="today1.html">link</a>
+    <div class="left-panel">
+        <div class="header-icon">
+            <img src="logo.svg" alt="Logo" class="header-icon-img">
+        </div>
+
+        <h2>Kaywon Univ Fashion Archive</h2>
+        <div class="full-stroke"></div>
+        <p class="intro-text">
+            계원예술대학교 학생들이 모여 자신이 좋아하는 패션 아이템 4가지를 소개합니다.
+            각자의 취향과 개성을 담은 아이템을 통해 다양한 스타일을 엿볼 수 있습니다.
+            소중한 물건에 담긴 이야기와 선택의 이유를 함께 전달합니다.
+            랜덤한 4명이 모인 만큼 일종의 표본이라고도 할 수 있겠네요.
+        </p>
+        <div class="full-stroke"></div>
+        
+        <ul class="item-list">
+            <li>★ <a href="#item1">Peitai</a></li>
+            <li>★ <a href="#item2">Kamien x MJd Double Hole Belt</a></li>
+            <li>★ <a href="#item3">Camp Cap</a></li>
+            <li>★ <a href="#item4">Nike x Tom Sachs Mars Yard Shoe 2.0</a></li>
+        </ul>
+
+        <div class="full-stroke"></div>
+        
+        <div class="datetime-info">
+            <p id="current-time"></p>
+            <p id="current-date"></p>
+        </div>
+        <p class="copyright">♫ Digital Programming Project, Group 4</p>
+    </div>
+
+    <div class="right-content">
+        <div class="click-info">이미지를 클릭해보세요!</div>
+        <div class="full-stroke"></div>
+
+        <div id="item1" class="item-section">
+            <h1>Peitai</h1>
+            <div class="gif-container">
+                <a href="YOUR_TEAM_MEMBER_PAGE_1.html" target="_blank"> 
+                    <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmjoanY4ZmxxMGhpZGdqMG93dnJ0ZXBxbmI2bzBweGU3ajl0cDE1cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/dVJUMzhu9zqByivMh3/giphy.gif" alt="Peitai GIF">
+                </a>
+            </div>
+            <p>뻬이따이는 뻬이(컵) + 따이(주머니, 가방)이라는 대만의 단어에서 따온 이름으로, 컵을 들고 다닐 수 있는 가방이라는 의미입니다. 음료 문화가 잘 발달되어 있는 대만에선 (일회용) 컵홀더 대신 뻬이따이를 사용해 음료를 들고 다녀요. 한 번 쓰고 버리는 종이 컵홀더 대신 테이크아웃 컵, 텀블러, 페트병 등 활용 범위가 넓고 오래오래 쓸 수 있답니다. 스트랩의 내구성도 좋아 무거운 음료는 물론, 꼭 음료가 아니어도 안전하게 지지할 수 있는 물건에 걸어 사용할 수도 있어요. ー 22557024 박찬혁</p>
+        </div>
+        
+        <div id="item2" class="item-section">
+            <div class="full-stroke"></div>
+            <h1>Kamien x MJd Double Hole Belt</h1>
+            <div class="gif-container">
+                <a href="YOUR_TEAM_MEMBER_PAGE_2.html" target="_blank">
+                    <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWJvdWM1Y2hoOW13ZXhsMGxjdHI4ZGMxbWwwbDZ5aGpmdzcwZHlkcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/AHTpaVj4Y1LnrjNoRn/giphy.gif" alt="Kamien x MJd Double Hole Belt GIF">
+                </a>
+            </div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+
+        <div id="item3" class="item-section">
+            <div class="full-stroke"></div>
+            <h1>Camp Cap</h1>
+            <div class="gif-container">
+                <a href="YOUR_TEAM_MEMBER_PAGE_3.html" target="_blank">
+                    <img src="YOUR_GIF_URL_HERE_3.gif" alt="Camp Cap GIF">
+                </a>
+            </div>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+
+        <div id="item4" class="item-section">
+            <div class="full-stroke"></div>
+            <h1>Nike x Tom Sachs Mars Yard Shoe 2.0</h1>
+            <div class="gif-container">
+                <a href="https://yangyoungbi.github.io/fashion-items-page/" target="_blank">
+                    <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2FpOXNkdzl0d3FhYzI2cGh2cXhrZzNzMmp3bzh5dG82dXAzYnVtbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/8G3EFgXZ6Ksc9On79O/giphy.gif" alt="Nike x Tom Sachs Mars Yard Shoe 2.0 GIF">
+                </a>
+            </div>
+            <p>캐주얼한 팬츠나 조거, 혹은 미니멀한 셋업에도 자연스럽게 녹아들 수 있는 이 신발은, 내가 가진 옷들과도 잘 어울린다. 특히 컬러감이 강하지 않아 어디에나 포인트로 활용하기 좋고, 너무 튀지 않으면서도 존재감 있는 실루엣 덕분에 자신 있게 신을 수 있다. ー 22257035 양영비</p>
+
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+            
+            // 시분초 포맷 (예: 05:23:03 AM)
+            const timeOptions = { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit', 
+                hour12: true 
+            };
+            const currentTime = now.toLocaleTimeString('en-US', timeOptions);
+            document.getElementById('current-time').textContent = currentTime;
+
+            // 날짜 포맷 (예: Thursday, June 5, 2025)
+            const dateOptions = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            };
+            const currentDate = now.toLocaleDateString('en-US', dateOptions);
+            document.getElementById('current-date').textContent = currentDate;
+        }
+
+        // 페이지 로드 시 바로 실행
+        updateDateTime();
+        // 1초마다 업데이트 (실시간 반영)
+        setInterval(updateDateTime, 1000);
+    </script>
 </body>
 </html>
