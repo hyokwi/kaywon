@@ -14,7 +14,7 @@
             margin: 0;
             display: flex;
             overflow-x: hidden;
-            font-size: 14px; /* body의 기본 폰트 크기는 14px로 유지 */
+            font-size: 14px;
         }
 
         .left-panel {
@@ -41,25 +41,25 @@
             margin-left: 380px; 
         }
 
-        /* Left Panel Styling */
+
         .left-panel .header-icon {
-            display: flex; /* Flexbox를 사용하여 내부 요소 중앙 정렬 */
-            justify-content: center; /* 가로 방향 중앙 정렬 */
-            margin-bottom: 30px; /* 로고 아래 여백을 30px로 증가 */
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px; 
         }
         .left-panel .header-icon-img {
-            width: 250px; /* 기존 50px의 5배 */
-            height: 250px; /* 기존 50px의 5배 */
-            display: block; /* img도 블록 요소로 만들어 margin-bottom이 잘 적용되도록 */
+            width: 250px;
+            height: 250px;
+            display: block;
         }
 
         .left-panel h2 {
-            text-align: center; /* 제목 중앙 정렬 추가 */
+            text-align: center;
             margin-top: 0;
             color: #333;
             margin-bottom: 15px;
             font-size: 24px; 
-            font-weight: bold; /* 제목은 Bold 유지 */
+            font-weight: bold;
         }
 
         .left-panel .intro-text {
@@ -84,9 +84,9 @@
         .left-panel ul.item-list li a {
             text-decoration: none;
             color: #000;
-            font-weight: normal; /* 레귤러 유지 */
+            font-weight: normal;
             display: inline-block;
-            font-size: 14px; /* 14px로 통일 */
+            font-size: 14px; 
         }
         
         .left-panel ul.item-list li a:hover {
@@ -94,12 +94,12 @@
             text-decoration: underline;
         }
 
-        /* About 섹션 대신 날짜/시간 정보 스타일 */
+       
         .datetime-info {
             color: #333;
-            font-size: 14px; /* 14px로 통일 */
-            margin-top: 25px; /* 위쪽 여백 */
-            margin-bottom: 25px; /* 아래쪽 여백 */
+            font-size: 14px;
+            margin-top: 25px;
+            margin-bottom: 25px;
             line-height: 1.5;
         }
         .datetime-info p {
@@ -108,18 +108,17 @@
 
         .left-panel .copyright {
             margin-top: 30px; 
-            font-size: 14px; /* 14px로 통일 */
+            font-size: 14px;
             color: #666;
         }
 
-        /* Right Content Styling */
+       
         .right-content .item-section {
             padding-top: 30px; 
             margin-top: -30px; 
         }
 
         .right-content .item-section:first-of-type {
-            /* padding-top: 0; */ /* 제거 (맨 위 문구 때문에) */
             margin-top: 0;
         }
 
@@ -130,14 +129,14 @@
             font-size: 1.8em;
         }
 
-        /* GIF 컨테이너 스타일 */
+        
         .gif-container {
             width: 100%;
-            padding-top: 60%; /* 원본 image-placeholder와 동일한 비율 유지 */
+            padding-top: 60%; 
             position: relative;
-            margin-bottom: 15px; /* 기존 placeholder와 동일한 하단 여백 */
-            overflow: hidden; /* 이미지가 컨테이너를 벗어나는 것을 방지 */
-            background-color: #ffffff; /* GIF 로드 전 배경색 */
+            margin-bottom: 15px;
+            overflow: hidden;
+            background-color: #ffffff; 
         }
 
         .gif-container img {
@@ -146,7 +145,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: contain; /* 이미지가 비율을 유지하며 컨테이너에 맞춰집니다. (cover도 가능) */
+            object-fit: contain;
             display: block;
         }
 
@@ -154,7 +153,7 @@
             line-height: 1.6;
             color: #000;
             margin-bottom: 20px; 
-            font-size: 1em; /* body의 font-size: 14px를 따름 */
+            font-size: 1em;
         }
 
         .right-content .bottom-title {
@@ -167,7 +166,7 @@
             font-size: 1.5em;
         }
 
-        /* Responsive adjustments */
+      
         @media (max-width: 768px) {
             body {
                 flex-direction: column;
@@ -187,7 +186,7 @@
             }
         }
 
-        /* Full Stroke Styling */
+      
         .full-stroke {
             height: 1px;
             background-color: #000;
@@ -197,13 +196,13 @@
             width: calc(100% + 40px);
         }
 
-        /* ★★★ 새로운 문구 스타일 ★★★ */
+       
         .right-content .click-info {
-            text-align: center; /* 중앙 정렬 */
-            font-size: 14px; /* 폰트 크기 조정 */
-            color: #000; /* 색상 조정 */
-            margin-bottom: 15px; /* 아래쪽 여백 */
-            padding-top: 0px; /* right-content 자체의 padding-top이 있으므로 0으로 설정 */
+            text-align: center;
+            font-size: 14px;
+            color: #000;
+            margin-bottom: 15px;
+            padding-top: 0px; 
         }
     </style>
 </head>
@@ -289,7 +288,7 @@
         function updateDateTime() {
             const now = new Date();
             
-            // 시분초 포맷 (예: 05:23:03 AM)
+           
             const timeOptions = { 
                 hour: '2-digit', 
                 minute: '2-digit', 
@@ -299,7 +298,7 @@
             const currentTime = now.toLocaleTimeString('en-US', timeOptions);
             document.getElementById('current-time').textContent = currentTime;
 
-            // 날짜 포맷 (예: Thursday, June 5, 2025)
+           
             const dateOptions = { 
                 weekday: 'long', 
                 year: 'numeric', 
