@@ -1,147 +1,205 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Favorite Item - 뻬이따이</title>
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-    <style>
-        body {
-            font-family: 'Pretendard', sans-serif;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-            background-color: #ffffff;
-            padding: 20px;
-            box-sizing: border-box;
-        }
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>컵을 들고 다닐 수 있는 가방, 뻬이따이</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
 
-        .container {
-            width: 100%;
-            max-width: 700px;
-            background-color: #fff;
-            border: 1px solid #000;
-            padding: 30px;
-            box-sizing: border-box;
-            box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.1);
-        }
+    body {
+      font-family: 'Space Grotesk', 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+    }
 
-        .full-stroke {
-            height: 1px;
-            background-color: #000;
-            margin: 25px 0;
-        }
+    main {
+      width: 100%;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
 
-        h1 {
-            text-align: center;
-            margin-top: 0;
-            color: #333;
-            margin-bottom: 25px;
-            font-size: 1.8em; 
-            font-weight: bold;
-        }
+    h1 {
+      font-size: 2.5em;
+      font-weight: bold;
+      border-bottom: 1px solid black;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
 
-        .image-gallery {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+    h2 {
+      margin-top: 60px;
+      font-size: 1.8em;
+    }
 
-        .image-gallery .image-item {
-            flex: 1 1 calc(50% - 15px);
-            max-width: calc(50% - 15px);
-            min-width: 280px;
-            box-sizing: border-box;
-        }
+    img {
+      max-width: 100%;
+      margin: 20px 0;
+      border-radius: 10px;
+    }
 
-        .image-item .image-container {
-            width: 100%;
-            overflow: hidden;
-            background-color: #ffffff;
-            border: 1px solid #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    .image-credit {
+      font-size: 0.8em;
+      color: #777;
+      margin-top: -10px;
+      margin-bottom: 30px;
+    }
 
-        .image-item .image-container img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            display: block;
-        }
+    #toc {
+      border-radius: 12px;
+      position: fixed;
+      top: 120px;
+      right: 24px;
+      width: 220px;
+      background: white;
+      padding: 20px;
+      border: 1px solid #ddd;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    }
 
-        p {
-            line-height: 1.7; 
-            color: #000;
-            margin-bottom: 15px; 
-            font-size: 1em; 
-            text-align: justify;
-        }
+    #toc h3 {
+      font-size: 1.1em;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 5px;
+    }
 
-        .author-info {
-            text-align: right;
-            font-size: 0.85em; 
-            color: #555;
-            margin-top: 25px; 
-        }
+    #toc ul {
+      list-style: none;
+      padding-left: 0;
+    }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-                margin: 0 10px;
-            }
-            h1 {
-                font-size: 1.5em; 
-                margin-bottom: 15px;
-            }
-            p {
-                font-size: 0.95em; 
-                line-height: 1.6;
-            }
-            .image-gallery {
-                flex-direction: column;
-                gap: 20px;
-                align-items: center;
-            }
-            .image-gallery .image-item {
-                flex: 1 1 100%;
-                max-width: 100%;
-            }
-        }
-    </style>
+    #toc li {
+      margin-bottom: 10px;
+    }
+
+    #toc a {
+      text-decoration: none;
+      color: #555;
+    }
+
+    #toc a.active {
+      font-weight: bold;
+      color: black;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+  
 </head>
 <body>
-    <div class="container">
-        <h1>컵을 들고 다닐 수 있는 가방, 뻬이따이</h1>
-        <div class="full-stroke"></div>
 
-        <div class="image-gallery">
-            <div class="image-item">
-                <div class="image-container">
-                    <img src="https://i.imgur.com/QFJ1Kbi.jpeg" alt="뻬이따이 Image 1">
-                </div>
-            </div>
-            <div class="image-item">
-                <div class="image-container">
-                    <img src="https://shop-phinf.pstatic.net/20240621_120/1718959588114kaadE_JPEG/9234569784626621_433692278.jpg?type=m510" alt="뻬이따이 Image 2">
-                </div>
-            </div>
-        </div>
+<main>
+  <h1>컵을 들고 다닐 수 있는 가방, 뻬이따이</h1>
+  <img src="https://i.imgur.com/QFJ1Kbi.jpeg" alt="peitai1">
+  <p class="image-credit">이미지 출처: 나</p>
+  <p style="font-size: 1.1em; color: #666; margin-bottom: 30px;">
+    내가 가장 좋아하는 패션 아이템은 바로 <strong>Peitai</strong>이다. 아래는 내가 이 아이템을 선택하게 된 이유와 뻬이따이에 대한 소개를 해보겠다.
+  </p>
 
-        <p>
-            뻬이따이(杯袋帶, 베이따이다이)는 대만에서 유행하는 음료용 가방 스트랩으로, 텀블러나 테이크아웃 음료 컵을 들고 다닐 수 있게 만든 스트랩이에요.
-            주로 패브릭이나 실리콘 소재로 만들어지고, 손잡이나 어깨끈으로 활용 가능해 실용성과 귀여움을 동시에 챙길 수 있어요.
-            이렇게 스트랩으로 된 뻬이따이 말고도 그물망이나 에코백처럼 작게 나온 음료용 가방도 있답니다.
-        </p>
+  <section class="fade-in" id="why-chosen">
+    <h2>이 아이템을 선택한 이유</h2>
+    <img src="https://shop-phinf.pstatic.net/20240621_120/1718959588114kaadE_JPEG/9234569784626621_433692278.jpg?type=m510" alt="peitai2">
+    <p class="image-credit">이미지 출처: 뻬이따이 공식 판매처</p>
+    <p>
+      뻬이따이(杯袋帶, 베이따이다이)는 대만에서 유행하는 음료용 가방 스트랩으로, 텀블러나 테이크아웃 음료 컵을 들고 다닐 수 있게 만든 스트랩이에요.
+      주로 패브릭이나 실리콘 소재로 만들어지고, 손잡이나 어깨끈으로 활용 가능해 실용성과 귀여움을 동시에 챙길 수 있어요.
+      이렇게 스트랩으로 된 뻬이따이 말고도 그물망이나 에코백처럼 작게 나온 음료용 가방도 있답니다.
+    </p>
+  </section>
 
-        <p class="author-info">
-            22557024 박찬혁
-        </p>
-    </div>
+  <section class="fade-in" id="favorite-aspect">
+    <h2>내가 좋아하는 이유</h2>
+    <p>
+     겉만 보면 일반적인 스트랩 같지만 무거운 음료도 휴대할 수 있고,
+     지갑같은 물건도 걸고 다닐 수 있어 유틸리티스러운 물건이다. 
+     나는 이렇게 작은 물건에 여러 기능/활용도가 있는 걸 좋아하기 때문에
+      뻬이따이를 소개하게 됐다.
+    </p>
+  </section>
+
+  <section class="fade-in" id="style-matching">
+    <h2>코디와 활용</h2>
+    <img src="https://i.imgur.com/KKDi5JZ.jpeg" alt="peitai3">
+    <p class="image-credit">이미지 출처: Twitter @kuanghanway</p>
+    <p>
+     나는 기본적으로 가방 고리에 걸고 다니는데, 바지에 걸거나 그냥 손에 휴대해도 좋다. 가볍고 작기 때문이다.
+    </p>
+  </section>
+
+  <section class="fade-in" id="reflection">
+    <h2>수업을 마치며</h2>
+    <p><strong>22557024 박찬혁</strong></p>
+    <p>
+      html과 css를 알아가면서 jsbin에 코드를 하나하나 추가해볼 때까지 약 세 달이라는 시간이 걸렸는데,
+      아직 모르는 점이 많아 구글링, AI의 도움을 받을 상황이 종종 있지만 계속 수업을 들으며
+      눈에 익혀가는 점이 좋았다. 프로그래밍도 일종의 「언어」이니 낯설더라도 부딪히고 
+      같은 코드라도 계속 봐가며 코드와 친해지는 것을 이번 학기의 목표로 삼았다.
+      100% 이뤄냈다고는 못하지만, 처음과 비교해보면 많이 성장했다고 생각한다.
+    </p>
+  </section>
+
+  <p style="font-size: 0.8em; color: #777;">© 2025 Kaywon Univ Fashion Archive.</p>
+</main>
+
+<aside id="toc">
+  <h3>In this article</h3>
+  <ul>
+    <li><a href="#why-chosen">선택한 이유</a></li>
+    <li><a href="#favorite-aspect">좋아하는 이유</a></li>
+    <li><a href="#style-matching">코디와 활용</a></li>
+    <li><a href="#reflection">수업 소감</a></li>
+  </ul>
+</aside>
+
+<script>
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('#toc a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      if (pageYOffset >= sectionTop - 150) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
+  });
+
+  const faders = document.querySelectorAll('.fade-in');
+  const appearOptions = { threshold: 0.2 };
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, appearOptions);
+  faders.forEach(el => observer.observe(el));
+  
+</script>
+
 </body>
 </html>
